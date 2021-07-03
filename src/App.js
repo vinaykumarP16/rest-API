@@ -36,7 +36,7 @@ export default class App extends React.Component {
     }
 
     addBook(){
-      axios.post(`http://localhost:3000/books`,this.state.newBookData).then((response)=>{
+      axios.post(`https://myfriends-api.herokuapp.com/books`,this.state.newBookData).then((response)=>{
         let { books }= this.state;
         books.push(response.data);
         this.setState({books, NewBookModal:false, newBookData:{
@@ -48,7 +48,7 @@ export default class App extends React.Component {
 
     updateBook(){
       let {title,rating} = this.state.editBookData;
-      axios.put('http://localhost:3000/books/' + this.state.editBookData.id,{
+      axios.put('https://myfriends-api.herokuapp.com/books' + this.state.editBookData.id,{
         title,rating
       }).then((response)=>{
         this._refreshBooks();
@@ -59,7 +59,7 @@ export default class App extends React.Component {
     }
 
     _refreshBooks(){
-      axios.get(`http://localhost:3000/books`).then((response)=>{
+      axios.get(`https://myfriends-api.herokuapp.com/books`).then((response)=>{
         this.setState({
           books:response.data
         })
@@ -73,7 +73,7 @@ export default class App extends React.Component {
     }
 
     deleteBook(id){
-      axios.delete('http://localhost:3000/books/'+id).then((response)=>{
+      axios.delete('https://myfriends-api.herokuapp.com/books'+id).then((response)=>{
         this._refreshBooks();
       })
     }
